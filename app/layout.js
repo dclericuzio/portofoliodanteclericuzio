@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel='icon' href='./arrow.png' />
+        <link rel='icon' href='/arrow.ico' />
       </head>
       <body className={`${dmsans.className}`}>
         <header>
