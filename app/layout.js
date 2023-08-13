@@ -8,6 +8,9 @@ const dmsans = DM_Sans({subsets: ['latin'],  weight:['400','500','700']})
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel='icon' href='./arrow.png' />
+      </head>
       <body className={`${dmsans.className}`}>
         <header>
           <NavBar/>
