@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 export default function Footer() {
 
     const [iconsState, setIconsState] = useState({
-        linkedin: false,
-        github: false,
-        ig: false,
-        mail: false,
-        wa: false,
+        linkedin: true,
+        github: true,
+        ig: true,
+        mail: true,
+        wa: true,
     });
 
     useEffect(() => {
@@ -49,7 +49,7 @@ export default function Footer() {
     };
 
     return (
-        <div className="bg-[#ECECEC] py-24 px-[16px]">
+        <div className="bg-[#1C1C1C] py-24 px-[16px]">
             <div className="flex items-center dc-container justify-center gap-5">
                 {Object.keys(iconsState).map((icon) => (
                     <a key={icon} href={iconHrefMap[icon]} target="_blank" rel="noopener noreferrer">
