@@ -21,6 +21,79 @@
     .animation-effect{
         transition: all 300ms ease-out;
     }
+
+    .card1{
+        border: 1px solid #3E3E3E;
+        background-color: #2C2C2C;
+        border-radius: 10px;
+        height: 300px;
+        padding: 32px;
+        width: 100%;
+    }
+
+    .card1:hover{
+        background-color: #68CC93;
+    }
+
+    .button-arrow{
+        flex-shrink: 0;
+        padding: 5px;
+        margin-left: 5px;
+        border: 2px solid #3E3E3E;
+        background-color: #FFFFFF50;
+        border-radius: 100%;
+        height: 30px;
+        width: 30px;
+    }
+
+    @keyframes slide {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+    }
+    
+    .logos {
+        overflow: hidden;
+        padding: 60px 0;
+        white-space: nowrap;
+        position: relative;
+    }
+    
+    .logos:before,
+    .logos:after {
+        position: absolute;
+        top: 0;
+        width: 150px;
+        height: 100%;
+        content: "";
+        z-index: 2;
+    }
+    
+    .logos:before {
+        left: 0;
+    }
+    
+    .logos:after {
+        right: 0;
+    }
+    
+    .logos:hover .logos-slide {
+        animation-play-state: paused;
+    }
+    
+    .logos-slide {
+        display: inline-flex;
+        width: max-content;
+        animation: 35s slide infinite linear;
+    }
+    
+    .logos-inner {
+        margin: 0 10px;
+    }
+
 }
 
 

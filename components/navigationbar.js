@@ -15,7 +15,7 @@ export default function navigationbar() {
       <div className='flex justify-between items-center dc-container'>
         <div className='md:flex hidden items-center'>
           <Link href='/' className='tracking-[-2px] text-[28px] font-[700] text-[#68CC93]'>Dante Clericuzio</Link>
-          <img src='https://res.cloudinary.com/dsjeycect/image/upload/v1691919958/danteclericuzio/dc_ov8ob7.jpg' alt='logo' className='hidden lg:block w-[50px] h-[50px] bg-contain bg-center rounded-full bg-no-repeat ml-[16px]'/>
+          <img src='./danteclericuzio.png' alt='logo' className='hidden lg:block w-[50px] h-[50px] bg-contain bg-center rounded-full bg-no-repeat ml-[16px]'/>
         </div>
 
         <div className='hidden md:flex'>
@@ -39,7 +39,7 @@ export default function navigationbar() {
                     key={i}
                     href={item.href}
                   >
-                    <button className='hidden lg:block rounded-[10px] py-[12px] px-[24px] text-[#E4E4E4] hover:text-[#FCFAF4] border-[1px] border-[#E4E4E4] hover:border-[#68CC93] hover:bg-[#68CC93] animation-effect'>
+                    <button className='hidden lg:block rounded-md py-[12px] px-[24px] text-[#E4E4E4] hover:text-[#FCFAF4] border-border border border-[#3E3E3E] hover:border-[#68CC93] hover:bg-[#68CC93] animation-effect'>
                       {item.label}
                     </button>
                   </Link>
@@ -50,9 +50,9 @@ export default function navigationbar() {
 
         {/* HAMBURGER */}
         <div className='flex ml-auto md:hidden group z-50 w-6 h-6 cursor-pointer flex-col justify-between items-center' onClick={() => { setOpen(!open) }}>
-          <span className={`h-1 w-full rounded-lg cursor-pointer transform transition duration-300 ease-in-out bg-[#E4E4E4] ${open ? "rotate-45 translate-y-2.5" : ""}`} />
+          <span className={`h-1 w-full rounded-lg cursor-pointer transform transition duration-300 ease-in-out bg-[#68CC93] ${open ? "rotate-45 translate-y-2.5" : ""}`} />
           <span className={`h-1 rounded-lg cursor-pointer transition-all duration-300 ease-in-out bg-[#E4E4E4] ${open ? "w-0" : "w-full"}`} />
-          <span className={`h-1 w-full rounded-lg cursor-pointer transform transition duration-300 ease-in-out bg-[#E4E4E4] ${open ? "-rotate-45 -translate-y-2.5" : ""}`} />
+          <span className={`h-1 w-full rounded-lg cursor-pointer transform transition duration-300 ease-in-out bg-[#68CC93] ${open ? "-rotate-45 -translate-y-2.5" : ""}`} />
         </div>
       </div>
 
@@ -61,7 +61,7 @@ export default function navigationbar() {
         <ul className='flex flex-col w-full h-full mt-36'>
           <div onClick={() => { setOpen(!open) }} className='flex items-center mb-[40px]'>
             <Link href='/' className='tracking-[-2px] text-[28px] font-[700] text-[#68CC93]'>Dante Clericuzio</Link>
-            <img src='https://res.cloudinary.com/dsjeycect/image/upload/v1691919958/danteclericuzio/dc_ov8ob7.jpg' alt='logo' className='w-[50px] h-[50px] bg-contain bg-center rounded-full bg-no-repeat ml-[16px]'/>
+            <img src='./danteclericuzio.png' alt='logo' className='w-[50px] h-[50px] bg-contain bg-center rounded-full bg-no-repeat ml-[16px]'/>
           </div>
           {links.map((item, i)=>(
             !item.isButton 
