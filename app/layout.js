@@ -1,6 +1,6 @@
 import './globals.css'
-import NavBar from '../components/navigationbar.js'
-import Footer from '../components/footer.js'
+import NavBar from '@/components/layout/navigationbar'
+import Footer from '@/components/layout/footer'
 import {DM_Sans} from 'next/font/google'
 
 const dmsans = DM_Sans({subsets: ['latin'],  weight:['400','500','700']})
