@@ -43,7 +43,7 @@ export default function HomeHero(){
                     
                     {/* 2nd */}
                     <Link 
-                    href='https://www.internationalsar.com/' 
+                    href='https://www.easycash.id/' 
                     target="_blank" rel="noopener noreferrer"
                     >
                     <div className="card1 animation-effect group flex overflow-hidden">

@@ -13,7 +13,7 @@ export default function ContactHero(){
     const sendEmail = (e) => {
         e.preventDefault();
         setLoading(true)
-        emailjs.sendForm('service_6c35oe1', 'template_41qbcyh', formData.current, 'VbsxYzmqTnKLbLkRL')
+        emailjs.sendForm('service_zk3qmep', 'template_41qbcyh', formData.current, 'tJm5AiimXVbnv8b_x')
           .then((result) => {
                 setLoading(false)
               toast.success('Message Sent!', {
@@ -86,7 +86,7 @@ export default function ContactHero(){
                                 placeholder="Type you message" 
                                 name="message"   
                             />
-                            <button type="submit" className={`${loading ? 'bg-[#000000]' : 'bg-[#68CC93]' } relative animation-effect rounded-[10px] py-[12px] h-[70px] px-[24px] text-[#E4E4E4]`}>
+                            <button type="submit" className={`${loading ? 'bg-[#1C1C1C]' : 'bg-[#68CC93]' } relative animation-effect rounded-[10px] py-[12px] h-[70px] px-[24px] text-[#E4E4E4]`}>
                                 {loading ? 
                                     <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
                                         <Loader/>

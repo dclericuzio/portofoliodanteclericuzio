@@ -4,6 +4,17 @@
 
 
 @layer components{
+
+    ::-moz-selection { /* Code for Firefox */
+        color: #68CC93;
+        background: #E4E4E4;
+      }
+      
+      ::selection {
+        color: #68CC93;
+        background: #E4E4E4;
+      }
+
     .dc-container{
         max-width: 1240px;
         width: 100%;
