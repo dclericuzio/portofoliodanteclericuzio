@@ -106,3 +106,30 @@ export const works = [
         image: './easycash.png'
     }
 ]
+
+export const skills = [
+    {
+        name: 'VueJs'
+    },
+    {
+        name: 'Nextjs'
+    },
+    {
+        name: 'React'
+    },
+    {
+        name: 'Javascript'
+    },
+    {
+        name: 'Typescript'
+    },
+    {
+        name: 'Node.js'
+    },
+    {
+        name: 'CSS'
+    },
+    {
+        name: 'TailwindCSS'
+    },
+]

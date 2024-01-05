@@ -24,8 +24,8 @@ export default function WorksHero () {
                                             <h1 className="mr-5 group-hover:text-transparent font-[500] text-[#7E7E7E] text-[28px] tracking-[-1px] animation-effect">{item.name}</h1>
                                         </div>
                                         <div className="flex flex-col absolute">
-                                            <h1 className="mr-5 group-hover:text-[#FCFAF4] font-[500] text-transparent text-[14px] tracking-[-1px] animation-effect">{item.name}</h1>
-                                            <h1 className="mr-5 group-hover:text-[#FCFAF4] font-[500] text-transparent text-[28px] tracking-[-1px] animation-effect">View The Website</h1>
+                                            <h1 className="mr-5 group-hover:text-[#E4E4E4] font-[500] text-transparent text-[14px] tracking-[-1px] animation-effect">{item.name}</h1>
+                                            <h1 className="mr-5 group-hover:text-[#E4E4E4] font-[500] text-transparent text-[28px] tracking-[-1px] animation-effect">View The Website</h1>
                                         </div>
                                         <div className="group-hover:border-[#E4E4E4] button-arrow">
                                             <img src="./arrow.png" alt="arrow" className="group-hover:rotate-90 animation-effect"/>
