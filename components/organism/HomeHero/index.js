@@ -31,7 +31,7 @@ export default function HomeHero(){
                         <h1 className="md:group-hover:text-transparent group-hover:text-[#68CC93] font-[700] text-[#E4E4E4]  text-[40px] tracking-[-2px] md:group-hover:-translate-y-6 animation-effect">Hey, I'm Dante</h1>
                         <div className="justify-between flex items-center md:group-hover:translate-y-6 animation-effect">
                             <h1 className="hidden md:block mr-5 md:group-hover:text-[#68CC93] font-[500] text-[#7E7E7E] text-[20px] tracking-[-1px] animation-effect">"Website without visitors is like a ship lost in the horizon."</h1>
-                            <h1 className="block group-hover:text-[#E4E4E4] md:hidden mr-5 font-[500] text-[#313638] text-[20px] tracking-[-1px] animation-effect">Learn More About Me</h1>
+                            <h1 className="block group-hover:text-[#E4E4E4] md:hidden mr-5 font-[500] text-[20px] tracking-[-1px] animation-effect">Learn More About Me</h1>
                             <div className="group-hover:border-[#E4E4E4] button-arrow">
                             <img src="./arrow.png" alt="arrow" className="group-hover:rotate-90 animation-effect"/>
                             </div>
