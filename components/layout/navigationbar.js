@@ -1,13 +1,11 @@
 "use client";
 import Link from 'next/link'
 import React, {useState} from 'react'
-import {usePathname} from 'next/navigation'
 import { links } from '@/app/constants'
 
 export default function navigationbar() {
 
   const [open, setOpen] = useState(false)
-  const pathName = usePathname()
 
   return (
     <nav className='bg-[#1C1C1C] py-5 px-[16px] z-50 fixed top-0 w-full'>
@@ -26,7 +24,7 @@ export default function navigationbar() {
               (
                 <Link
                   key={i}
-                  className={`${pathName == item.href ? 'text-[#68CC93]' : 'text-[#E4E4E4] hover:text-[#68CC93]'} mr-[40px] text-[24px] font-[700] animation-effect`}
+                  className='text-[#E4E4E4] hover:text-[#68CC93] mr-[40px] text-[24px] font-[700] animation-effect'
                   href={item.href}
                   {...(i === links.length - 2 ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 >
@@ -68,7 +66,7 @@ export default function navigationbar() {
             ? 
             (
               <Link 
-                className={`${pathName == item.href ? 'text-[#68CC93]' : 'text-[#E4E4E4] hover:text-[#68CC93]'} mb-[40px] text-[24px] font-[700] animation-effect`}
+                className='text-[#E4E4E4] hover:text-[#68CC93] mb-[40px] text-[24px] font-[700] animation-effect'
                 href={item.href}
                 onClick={() => { setOpen(!open) }}
                 {...(i === links.length - 2 ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
