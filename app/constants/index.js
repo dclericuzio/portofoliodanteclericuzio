@@ -5,11 +5,11 @@ import { SiNextdotjs, SiTailwindcss, SiPostman } from "react-icons/si";
 
 export const links = [
     {
-        href: 'works',
+        href: '/works',
         label: 'Works'
     },
     {
-        href: 'about',
+        href: '/about',
         label: 'About'
     },
     {
