@@ -12,7 +12,7 @@ export default function HomeHero(){
 
     React.useEffect(() => {
         const timer = setTimeout(() => {
-        setShowSkeleton(false);
+            setShowSkeleton(false);
         }, 2000);
 
         return () => clearTimeout(timer);

@@ -27,14 +27,14 @@
     }
 
     ::-moz-selection { /* Code for Firefox */
-        color: #68CC93;
-        background: #E4E4E4;
-      }
+        color: #E4E4E4;
+        background: #000;
+    }
       
-      ::selection {
-        color: #68CC93;
-        background: #E4E4E4;
-      }
+    ::selection {
+        color: #E4E4E4;
+        background: #000;
+    }
 
     .dc-container{
         max-width: 1240px;
