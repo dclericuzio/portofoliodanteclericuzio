@@ -5,6 +5,27 @@
 
 @layer components{
 
+    @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+    }
+      
+    .gradient-animation {
+        height: 35px;
+        width: 65px;
+        border-radius: 999px;
+        background: linear-gradient(45deg, #2C2C2C, #1C1C1C, #7E7E7E, #3E3E3E);
+        background-size: 400% 400%;
+        animation: gradientAnimation 3s ease infinite;
+    }
+
     ::-moz-selection { /* Code for Firefox */
         color: #68CC93;
         background: #E4E4E4;
@@ -35,15 +56,10 @@
 
     .card1{
         border: 1px solid #3E3E3E;
-        background-color: #2C2C2C;
         border-radius: 10px;
         height: 300px;
         padding: 32px;
         width: 100%;
-    }
-
-    .card1:hover{
-        background-color: #68CC93;
     }
 
     .button-arrow{
