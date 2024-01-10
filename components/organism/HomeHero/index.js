@@ -1,4 +1,5 @@
 "use client"
+import React from 'react'
 import Link from "next/link";
 import Typewriter from 'typewriter-effect';
 import { BsStack } from "react-icons/bs";
@@ -6,18 +7,38 @@ import { FaLinkedin } from "react-icons/fa";
 import { svgLogos } from "@/app/constants"
 
 export default function HomeHero(){
+
+    const [showSkeleton, setShowSkeleton] = React.useState(true);
+
+    React.useEffect(() => {
+        const timer = setTimeout(() => {
+        setShowSkeleton(false);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="bg-[#E4E4E4] dark:bg-[#1C1C1C] min-h-screen pt-20 pb-5 px-[16px]">
             <div className="dc-container">
                 
                 <div className="text-[#1C1C1C] dark:text-[#68CC93] text-center title-responsive font-[600] whitespace-nowrap tracking-[-1px] md:tracking-[-3px]">
-                    <Typewriter
-                    options={{
-                        strings: ['Web Developer </>','Software Engineer ⚙︎'],
-                        autoStart: true,
-                        loop: true
-                    }}
-                    />
+                    {showSkeleton 
+                    ? 
+                    (
+                        <div className="animate-pulse">Welcome to my site</div>
+                    )
+                    :
+                    (
+                        <Typewriter
+                            options={{
+                                strings: ['Web Developer </>', 'Software Engineer ⚙︎'],
+                                autoStart: true,
+                                loop: true
+                            }}
+                        />
+                    )
+                    }
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">

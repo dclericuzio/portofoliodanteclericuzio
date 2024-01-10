@@ -64,7 +64,8 @@ export default function navigationbar() {
         <ul className='flex flex-col w-full h-full mt-36'>
           <div onClick={() => { setOpen(!open) }} className='flex items-center mb-[40px]'>
             <Link href='/' className='tracking-[-2px] text-[28px] font-[700] text-[#1C1C1C] dark:text-[#68CC93]'>Dante Clericuzio</Link>
-            <img src='./danteclericuzio.png' alt='logo' className='w-[50px] h-[50px] bg-contain bg-center rounded-full bg-no-repeat ml-[16px]'/>
+            <img src='./danteclericuzio.png' alt='logo' className='w-[50px] h-[50px] bg-contain bg-center rounded-full bg-no-repeat mx-[16px]'/>
+            <ThemeSwitcher/>
           </div>
           {links.map((item, i)=>(
             !item.isButton 

@@ -4,9 +4,9 @@ import { works } from "@/app/constants"
 export default function WorksHero () {
 
     return (
-        <div className="bg-[#1C1C1C] min-h-screen pt-20 pb-5 px-[16px]">
+        <div className="bg-[#E4E4E4] dark:bg-[#1C1C1C] min-h-screen pt-20 pb-5 px-[16px]">
             <div className="dc-container">
-                <h1 className="text-[#7E7E7E] text-center title-responsive2 font-[600] whitespace-nowrap tracking-[-1px] md:tracking-[-3px]">
+                <h1 className="text-[#1C1C1C] dark:text-[#7E7E7E] text-center title-responsive2 font-[600] whitespace-nowrap tracking-[-1px] md:tracking-[-3px]">
                     All Works
                 </h1>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -16,11 +16,11 @@ export default function WorksHero () {
                             href={item.href}
                             target="_blank" rel="noopener noreferrer"
                         >
-                            <div className="card1 group flex w-full overflow-hidden animation-effect">
+                            <div className="bg-[#F9F9F9] hover:bg-[#FF5733] dark:bg-[#2C2C2C] dark:hover:bg-[#68CC93] card1 group flex w-full overflow-hidden animation-effect">
                                 <div className="flex flex-col relative w-full">
                                     <div className="justify-between flex items-center group-hover:translate-y-6 animation-effect">
                                         <div className="flex flex-col">
-                                            <h1 className="mr-5 group-hover:text-transparent font-[500] text-[#E4E4E4] text-[14px] tracking-[-1px] animation-effect">{item.company}</h1>
+                                            <h1 className="mr-5 group-hover:text-transparent font-[500] text-[#1C1C1C] dark:text-[#E4E4E4] text-[14px] tracking-[-1px] animation-effect">{item.company}</h1>
                                             <h1 className="mr-5 group-hover:text-transparent font-[500] text-[#7E7E7E] text-[28px] tracking-[-1px] animation-effect">{item.name}</h1>
                                         </div>
                                         <div className="flex flex-col absolute">
