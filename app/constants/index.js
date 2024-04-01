@@ -13,7 +13,7 @@ export const links = [
         label: 'About'
     },
     {
-        href: './cvdante.pdf',
+        href: './CV-2024-DANTECLERICUZIO.pdf',
         label: 'Resume'
     },
     {
