@@ -13,7 +13,7 @@ export default function navigationbar() {
       
       <div className='flex justify-between items-center dc-container'>
         <div className='md:flex hidden items-center'>
-          <Link href='/' className='tracking-[-2px] text-[28px] font-[700] text-[#1C1C1C] dark:text-[#68CC93]'>Dante Clericuzio</Link>
+          <Link href='/' className='tracking-[-2px] text-[28px] font-[700] text-[#1C1C1C] dark:text-[#68CC93]'>DON Clericuzio</Link>
           <img src='./danteclericuzio.png' alt='logo' className='hidden lg:block w-[50px] h-[50px] bg-contain bg-center rounded-full bg-no-repeat ml-[16px]'/>
         </div>
 
