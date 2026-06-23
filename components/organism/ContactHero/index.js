@@ -1,102 +1,146 @@
 "use client"
-import React, {useRef, useState} from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useState } from 'react';
+import Link from 'next/link';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from '../../loading'
+import { iconSvg } from '@/app/constants';
 
-export default function ContactHero(){
+export default function ContactHero() {
 
-    const formData = useRef();
     const [loading, setLoading] = useState(false)
+    const [cooldown, setCooldown] = useState(0)
 
-    const sendEmail = (e) => {
-        e.preventDefault();
-        setLoading(true)
-        emailjs.sendForm('service_zk3qmep', 'template_41qbcyh', formData.current, 'tJm5AiimXVbnv8b_x')
-          .then((result) => {
-                setLoading(false)
-              toast.success('Message Sent!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
-                e.target.reset();
-              
-          }, (error) => {
-              toast.error('Please Try Again!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
-              e.target.reset();
-          });
+    React.useEffect(() => {
+        if (cooldown <= 0) return;
+        const timer = setTimeout(() => setCooldown((c) => c - 1), 1000);
+        return () => clearTimeout(timer);
+    }, [cooldown]);
+
+    const toastOptions = {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
     };
 
-    return(
-        <div className="bg-[#E4E4E4] dark:bg-[#1C1C1C] min-h-screen pt-32 lg:pt-52 pb-5 px-[16px] relative">
-            <ToastContainer/>
+    const sendEmail = async (e) => {
+        e.preventDefault();
+        if (loading || cooldown > 0) return;
+        setLoading(true)
+        const form = e.target;
+        const payload = {
+            name: form.user_name.value,
+            email: form.user_email.value,
+            message: form.message.value,
+        };
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+
+            if (!res.ok) throw new Error('Request failed');
+
+            toast.success('Message Sent!', toastOptions);
+            form.reset();
+            setCooldown(30);
+        } catch (error) {
+            toast.error('Please Try Again!', toastOptions);
+        } finally {
+            setLoading(false)
+        }
+    };
+
+    const inputClass = "text-[#1C1C1C] dark:text-[#E4E4E4] w-full rounded-[10px] p-4 outline-none bg-[#E4E4E4] dark:bg-[#1C1C1C] border border-[#3E3E3E] focus:border-[#FF5733] dark:focus:border-[#68CC93] animation-effect placeholder:text-[#7E7E7E]"
+
+    return (
+        <div className="bg-[#E4E4E4] dark:bg-[#1C1C1C] min-h-screen pt-28 pb-16 px-[16px]">
+            <ToastContainer />
             <div className="dc-container">
-                <div className="grid grid-cols-7 gap-5 mb-0">
-                    <div className="col-span-7 lg:col-span-3 flex w-full">
-                        <div className="flex flex-col">
-                            <h1 className="mb-5 font-[700] text-[#1C1C1C] dark:text-[#E4E4E4]  text-[40px] tracking-[-2px]">Get In Touch</h1>
-                            <h1 className="mb-5 font-[400] text-[#7E7E7E]  text-[20px] tracking-[-1px]">Are you in search of a skilled Front-End Developer to enhance your upcoming project?</h1>
-                            <h1 className="mb-5 font-[400] text-[#7E7E7E]  text-[20px] tracking-[-1px]">I'd love to hear from you! Whether it's for a charity event, conceptual project or anything in relation to UX and UI I can help! Just contact me on this form or email below and let's start collaborating!</h1>
-                            <h1 className="mb-3 font-[400] text-[#FF5733] dark:text-[#68CC93]  text-[14px] tracking-[-1px]">WANT TO CALL ME?</h1>
-                            <a href='https://wa.me/62818589669?text=Hi%20Dante,%20I%20want%20to%20know%20more%20about%20websites.'>
-                                <h1 className="mb-5 font-[400] text-[#7E7E7E]  text-[20px] tracking-[-1px]">+62 81-858-9669</h1>
-                            </a>
-                            <h1 className="mb-3 font-[400] text-[#FF5733] dark:text-[#68CC93]  text-[14px] tracking-[-1px]">JUST WANT TO EMAIL ME?</h1>
-                            <a href="mailto:danteclericuzio1999@gmail.com">
-                                <h1 className="mb-5 font-[400] text-[#7E7E7E]  text-[20px] tracking-[-1px]">danteclericuzio1999@gmail.com</h1>
+
+                <div className="pt-2 pb-10 md:pb-14">
+                    <span className="uppercase tracking-[2px] text-[12px] md:text-[14px] font-[500] text-[#7E7E7E]">Contact</span>
+                    <h1 className="mt-4 text-[#1C1C1C] dark:text-[#E4E4E4] font-[600] leading-[1.02] tracking-[-1px] md:tracking-[-3px] text-[clamp(40px,8vw,110px)]">
+                        Get in touch
+                    </h1>
+                    <p className="mt-6 max-w-[560px] text-[#7E7E7E] font-[500] text-[16px] md:text-[20px] tracking-[-0.5px] leading-relaxed">
+                        Looking for a developer to bring your next project to life? Whether it&apos;s a full build or a focused task, I&apos;d love to hear from you.
+                    </p>
+                </div>
+
+                <div className="grid lg:grid-cols-2 gap-5 items-stretch">
+
+                    {/* INFO */}
+                    <div className="rounded-[20px] border border-[#3E3E3E] bg-[#F9F9F9] dark:bg-[#2C2C2C] p-8 md:p-10 flex flex-col gap-8">
+                        <p className="text-[#7E7E7E] font-[500] text-[16px] md:text-[18px] leading-relaxed">
+                            Available for freelance projects and full-time roles. Reach out through the form or any of the channels below — I usually reply within a day.
+                        </p>
+
+                        <div>
+                            <p className="text-[13px] uppercase tracking-[1px] font-[500] text-[#FF5733] dark:text-[#68CC93]">Want to call me?</p>
+                            <a href="https://wa.me/62818589669?text=Hi%20Dante,%20I%20want%20to%20know%20more%20about%20websites." target="_blank" rel="noopener noreferrer">
+                                <p className="mt-1 text-[#1C1C1C] dark:text-[#E4E4E4] font-[600] text-[20px] md:text-[24px] tracking-[-0.5px] hover:text-[#FF5733] dark:hover:text-[#68CC93] animation-effect">+62 81-858-9669</p>
                             </a>
                         </div>
+
+                        <div>
+                            <p className="text-[13px] uppercase tracking-[1px] font-[500] text-[#FF5733] dark:text-[#68CC93]">Just want to email me?</p>
+                            <a href="mailto:danteclericuzio1999@gmail.com">
+                                <p className="mt-1 text-[#1C1C1C] dark:text-[#E4E4E4] font-[600] text-[20px] md:text-[24px] tracking-[-0.5px] break-all hover:text-[#FF5733] dark:hover:text-[#68CC93] animation-effect">danteclericuzio1999@gmail.com</p>
+                            </a>
+                        </div>
+
+                        <div className="mt-auto">
+                            <p className="text-[13px] uppercase tracking-[1px] font-[500] text-[#7E7E7E] mb-3">Find me on</p>
+                            <div className="flex items-center gap-5">
+                                {iconSvg.map((item, i) => (
+                                    <Link key={i} href={item.href} target="_blank" rel="noopener noreferrer">
+                                        <item.name className="text-[24px] text-[#7E7E7E] hover:text-[#FF5733] dark:hover:text-[#68CC93] animation-effect" />
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                    <div className="col-span-7 lg:col-span-4 flex p-[32px] w-full h-[480px] bg-[#F9F9F9] dark:bg-[#2C2C2C] rounded-[10px] border border-border border-[#3E3E3E]">
-                        <form ref={formData} onSubmit={sendEmail} className='flex flex-col w-full'>
+
+                    {/* FORM */}
+                    <div className="rounded-[20px] border border-[#3E3E3E] bg-[#F9F9F9] dark:bg-[#2C2C2C] p-8 md:p-10">
+                        <form onSubmit={sendEmail} className="flex flex-col gap-4 w-full">
                             <input
                                 required
-                                className="text-[#1C1C1C] dark:text-[#E4E4E4] capitalize mb-5 w-full rounded-[10px] p-5 outline-none bg-[#E4E4E4] dark:bg-[#1C1C1C] placeholder:text-[#7E7E7E]"
+                                className={inputClass}
                                 type="text"
                                 placeholder="Name"
-                                name='user_name'     
+                                name="user_name"
                             />
                             <input
                                 required
-                                className="text-[#1C1C1C] dark:text-[#E4E4E4] mb-5 w-full rounded-[10px] p-5 outline-none bg-[#E4E4E4] dark:bg-[#1C1C1C] placeholder:text-[#7E7E7E]"
+                                className={inputClass}
                                 type="email"
-                                placeholder="Email" 
-                                name='user_email'    
+                                placeholder="Email"
+                                name="user_email"
                             />
                             <textarea
                                 required
-                                className="capitalize text-[#1C1C1C] dark:text-[#E4E4E4] mb-5 w-full rounded-[10px] p-5 h-44 outline-none bg-[#E4E4E4] dark:bg-[#1C1C1C] placeholder:text-[#7E7E7E]"
-                                type="text"
-                                placeholder="Type you message" 
-                                name="message"   
+                                className={`${inputClass} h-44 resize-none`}
+                                placeholder="Type your message"
+                                name="message"
                             />
-                            <button type="submit" className={`${loading ? 'bg-[#1C1C1C] animate-pulse' : 'bg-[#FF5733] dark:bg-[#68CC93]' } relative animation-effect rounded-[10px] py-[12px] h-[70px] px-[24px] text-[#E4E4E4]`}>
-                                {loading ? 
-                                    <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-                                        Submitting...
-                                    </div>
-                                    : 
-                                    'Submit'
-                                }
+                            <button
+                                type="submit"
+                                disabled={loading || cooldown > 0}
+                                className={`${loading ? 'animate-pulse' : ''} rounded-[10px] py-[16px] text-[16px] font-[700] text-[#FCFAF4] bg-[#FF5733] dark:bg-[#68CC93] hover:opacity-90 animation-effect disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:opacity-60`}
+                            >
+                                {loading ? 'Submitting...' : cooldown > 0 ? `Sent — please wait ${cooldown}s` : 'Send message'}
                             </button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>

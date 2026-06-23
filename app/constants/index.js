@@ -1,4 +1,4 @@
-import { FaLinkedin, FaGithub, FaInstagram, FaWhatsapp, FaReact, FaCss3Alt, FaGitlab, FaNodeJs, FaSass, FaFigma } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaWhatsapp, FaReact, FaCss3Alt, FaGitlab, FaNodeJs, FaSass, FaFigma } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { IoLogoJavascript, IoLogoVue, IoLogoHtml5 } from "react-icons/io5";
 import { SiNextdotjs, SiTailwindcss, SiPostman } from "react-icons/si";
@@ -13,8 +13,9 @@ export const links = [
         label: 'About'
     },
     {
-        href: './CV-2024-DANTECLERICUZIO.pdf',
-        label: 'Resume'
+        href: './cv-2026.pdf',
+        label: 'Resume',
+        external: true
     },
     {
         href: '/contact',
@@ -31,10 +32,6 @@ export const iconSvg = [
     {
         name: FaGithub,
         href: 'https://github.com/dclericuzio'
-    },
-    {
-        name: FaInstagram,
-        href: 'https://www.instagram.com/danteclericuzioo'
     },
     {
         name: MdEmail,
@@ -63,6 +60,42 @@ export const svgLogos = [
 ]
 
 export const works = [
+    {
+        href: 'https://www.starpacificasia.com/',
+        company: 'Corporate Website',
+        name: 'Star Pacific Asia',
+        image: './starpacific.png'
+    },
+    {
+        href: 'https://vit-pilates.com/en',
+        company: 'Booking & Admin Dashboard',
+        name: 'Vit Pilates',
+        image: './vitpilates.png'
+    },
+    {
+        href: 'https://www.yuhulab.com/',
+        company: 'Product Website',
+        name: 'YUHULAB',
+        image: './yuhulab.png'
+    },
+    {
+        href: 'https://www.ptsbs.id/',
+        company: 'Corporate Website',
+        name: 'PT SBS',
+        image: './sbs.png'
+    },
+    {
+        href: 'https://www.ptskl.com/',
+        company: 'Corporate Website',
+        name: 'PT SKL',
+        image: './skl.png'
+    },
+    {
+        href: 'https://lingofoundry.com/',
+        company: 'Education Website',
+        name: 'LingoFoundry',
+        image: './lingofoundry.png'
+    },
     {
         href: 'https://www.internationalsar.com/',
         company: 'Corporate Website',

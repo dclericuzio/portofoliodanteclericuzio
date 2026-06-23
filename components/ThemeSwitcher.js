@@ -14,7 +14,7 @@ export default function ThemeSwitcher() {
 
     if(!mounted){
         return (
-            <div className='gradient-animation'></div>
+            <div className='h-[35px] w-[65px] rounded-full bg-[#7E7E7E]/30 animate-pulse' aria-hidden='true'></div>
         )
     }
 
@@ -26,7 +26,9 @@ export default function ThemeSwitcher() {
       <div
         className={`${theme === 'dark' ? 'translate-x-0 bg-[#1C1C1C]' : 'translate-x-[32.5px] bg-[#E4E4E4]' } drop-shadow-2xl border-border border border-[#3E3E3E] animation-effect flex rounded-full text-[#5a5959] h-[35px] w-[35px] items-center justify-center`}
       >
-       {theme === 'dark' ? <FaMoon className='text-[#E4E4E4]'/> : <FaSun className='text-[#1C1C1C]'/>}
+       <span key={theme} className='theme-icon-in flex items-center justify-center'>
+         {theme === 'dark' ? <FaMoon className='text-[#E4E4E4]'/> : <FaSun className='text-[#1C1C1C]'/>}
+       </span>
       </div>
     </div>
   )

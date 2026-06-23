@@ -1,100 +1,152 @@
 "use client";
 import Link from 'next/link'
-import React, {useState} from 'react'
-import { links } from '@/app/constants'
+import { usePathname } from 'next/navigation'
+import React, { useState, useEffect } from 'react'
+import { FiArrowUpRight } from 'react-icons/fi'
+import { links, iconSvg } from '@/app/constants'
 import ThemeSwitcher from '@/components/ThemeSwitcher'
 
-export default function navigationbar() {
+export default function NavBar() {
 
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
+  useEffect(() => {
+    const mql = window.matchMedia('(min-width: 977px)')
+    const handleChange = (e) => { if (e.matches) setOpen(false) }
+    mql.addEventListener('change', handleChange)
+    return () => mql.removeEventListener('change', handleChange)
+  }, [])
+
+  const closeMenu = () => setOpen(false)
+
+  const externalProps = { target: '_blank', rel: 'noopener noreferrer' }
+
+  const navLinks = links.filter((item) => !item.isButton)
+  const ctaLink = links.find((item) => item.isButton)
+
+  const renderDesktopLink = (item, i) => {
+    const isActive = pathname === item.href
+
+    if (item.isButton) {
+      return (
+        <Link key={i} href={item.href} onClick={closeMenu} {...(item.external ? externalProps : {})}>
+          <button className='hidden nav:block rounded-[10px] py-[12px] px-[24px] text-[18px] font-[600] text-[#1C1C1C] hover:text-[#FCFAF4] dark:text-[#E4E4E4] dark:hover:text-[#FCFAF4] border border-[#3E3E3E] hover:border-[#FF5733] hover:bg-[#FF5733] dark:hover:border-[#68CC93] dark:hover:bg-[#68CC93] animation-effect'>
+            {item.label}
+          </button>
+        </Link>
+      )
+    }
+
+    return (
+      <Link
+        key={i}
+        href={item.href}
+        onClick={closeMenu}
+        {...(item.external ? externalProps : {})}
+        className={`text-[24px] font-[700] animation-effect hover:text-[#FF5733] dark:hover:text-[#68CC93] ${isActive ? 'text-[#FF5733] dark:text-[#68CC93]' : 'text-[#1C1C1C] dark:text-[#E4E4E4]'}`}
+      >
+        {item.label}
+      </Link>
+    )
+  }
 
   return (
-    <nav className='bg-[#E4E4E4] dark:bg-[#1C1C1C] py-5 px-[16px] z-50 fixed top-0 w-full'>
-      
-      <div className='flex justify-between items-center dc-container'>
-        <div className='md:flex hidden items-center'>
-          <Link href='/' className='tracking-[-2px] text-[28px] font-[700] text-[#1C1C1C] dark:text-[#68CC93]'>DON Clericuzio</Link>
-          <img src='./danteclericuzio.png' alt='logo' className='hidden lg:block w-[50px] h-[50px] bg-contain bg-center rounded-full bg-no-repeat ml-[16px]'/>
+    <nav className='fixed top-3 left-0 w-full z-50 px-[16px]'>
+
+      <div className='dc-container relative z-[60] flex justify-between items-center rounded-full border border-[#3E3E3E] bg-[#E4E4E4]/70 dark:bg-[#1C1C1C]/70 backdrop-blur-md py-3 px-5 md:px-6'>
+
+        <Link href='/' onClick={closeMenu} className='flex items-center gap-3 nav:gap-[16px] min-w-0'>
+          <img src='./danteclericuzio.jpg' alt='logo' className='shrink-0 w-10 h-10 nav:w-[44px] nav:h-[44px] bg-contain bg-center rounded-full bg-no-repeat' />
+          <span className='whitespace-nowrap tracking-[-1px] nav:tracking-[-2px] text-[20px] nav:text-[28px] font-[700] text-[#1C1C1C] dark:text-[#E4E4E4]'>Dante Clericuzio</span>
+        </Link>
+
+        <div className='hidden nav:flex items-center gap-[40px]'>
+          {links.map((item, i) => renderDesktopLink(item, i))}
+          <ThemeSwitcher />
         </div>
 
-        <div className='hidden md:flex'>
-          <ul className='flex cursor-pointer items-center'>
-            {links.map((item, i)=>(
-              !item.isButton 
-              ?
-              (
-                <Link
-                  key={i}
-                  className='text-[#1C1C1C] dark:text-[#E4E4E4] hover:text-[#FF5733] dark:hover:text-[#68CC93] mr-[40px] text-[24px] font-[700] animation-effect'
-                  href={item.href}
-                  {...(i === links.length - 2 ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                >
-                  {item.label}
-                </Link>
-              )
-              :
-              (
-                <div className='flex flex-row items-center'>
-                  <Link 
-                    key={i}
-                    href={item.href}
-                  >
-                    <button className='mr-[20px] hidden lg:block rounded-md py-[12px] px-[24px] text-[#1C1C1C] hover:text-[#FCFAF4] dark:text-[#E4E4E4] dark:hover:text-[#FCFAF4] border-border border border-[#3E3E3E] hover:border-[#FF5733] hover:bg-[#FF5733] dark:hover:border-[#68CC93] dark:hover:bg-[#68CC93] animation-effect'>
-                      {item.label}
-                    </button>
-                  </Link>
-                  <ThemeSwitcher/>
-                </div>
-                  
-              )
-            ))}
-          </ul>
-        </div>
-
-        {/* HAMBURGER */}
-        <div className='flex ml-auto md:hidden group z-50 w-6 h-6 cursor-pointer flex-col justify-between items-center' onClick={() => { setOpen(!open) }}>
-          <span className={`h-1 w-full rounded-lg cursor-pointer transform transition duration-300 ease-in-out bg-[#FF5733] dark:bg-[#68CC93] ${open ? "rotate-45 translate-y-2.5" : ""}`} />
-          <span className={`h-1 rounded-lg cursor-pointer transition-all duration-300 ease-in-out bg-[#1C1C1C] dark:bg-[#E4E4E4] ${open ? "w-0" : "w-full"}`} />
-          <span className={`h-1 w-full rounded-lg cursor-pointer transform transition duration-300 ease-in-out bg-[#FF5733] dark:bg-[#68CC93] ${open ? "-rotate-45 -translate-y-2.5" : ""}`} />
-        </div>
+        {/* MOBILE TOGGLE */}
+        <button
+          type='button'
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+          className='flex nav:hidden shrink-0 w-6 h-6 cursor-pointer flex-col justify-between items-center'
+        >
+          <span className={`h-1 w-full rounded-lg transform transition duration-300 ease-in-out bg-[#FF5733] dark:bg-[#68CC93] ${open ? "rotate-45 translate-y-2.5" : ""}`} />
+          <span className={`h-1 rounded-lg transition-all duration-300 ease-in-out bg-[#1C1C1C] dark:bg-[#E4E4E4] ${open ? "w-0" : "w-full"}`} />
+          <span className={`h-1 w-full rounded-lg transform transition duration-300 ease-in-out bg-[#FF5733] dark:bg-[#68CC93] ${open ? "-rotate-45 -translate-y-2.5" : ""}`} />
+        </button>
       </div>
 
-      {/* MOBILE */}
-      <div className={`${open ? 'max-h-full' : 'max-h-0 overflow-hidden'} px-[16px] bg-[#E4E4E4] dark:bg-[#1C1C1C] fixed top-0 left-0 z-10 w-full h-full animation-effect`}>
-        <ul className='flex flex-col w-full h-full mt-36'>
-          <div onClick={() => { setOpen(!open) }} className='flex items-center mb-[40px]'>
-            <Link href='/' className='tracking-[-2px] text-[28px] font-[700] text-[#1C1C1C] dark:text-[#68CC93]'>Dante Clericuzio</Link>
-            <img src='./danteclericuzio.png' alt='logo' className='w-[50px] h-[50px] bg-contain bg-center rounded-full bg-no-repeat mx-[16px]'/>
-            <ThemeSwitcher/>
-          </div>
-          {links.map((item, i)=>(
-            !item.isButton 
-            ? 
-            (
-              <Link 
+      {/* MOBILE MENU */}
+      <div
+        aria-hidden={!open}
+        className={`nav:hidden fixed inset-0 z-10 flex flex-col px-[24px] pt-[128px] pb-[40px] bg-[#E4E4E4] dark:bg-[#1C1C1C] transition-all duration-300 ease-in-out ${open ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
+      >
+        <span className='text-[12px] font-[500] tracking-[2px] uppercase text-[#7E7E7E] mb-2'>Menu</span>
+
+        <ul className='flex flex-col border-t border-[#3E3E3E]'>
+          {navLinks.map((item, i) => {
+            const isActive = pathname === item.href
+            return (
+              <li
                 key={i}
-                className='text-[#1C1C1C] dark:text-[#E4E4E4] hover:text-[#FF5733] dark:hover:text-[#68CC93] mb-[40px] text-[24px] font-[700] animation-effect'
-                href={item.href}
-                onClick={() => { setOpen(!open) }}
-                {...(i === links.length - 2 ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                className='border-b border-[#3E3E3E]'
+                style={{
+                  transitionProperty: 'opacity, transform',
+                  transitionDuration: '400ms',
+                  transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                  transitionDelay: open ? `${100 + i * 70}ms` : '0ms',
+                  opacity: open ? 1 : 0,
+                  transform: open ? 'translateY(0)' : 'translateY(16px)',
+                }}
               >
-                {item.label}
-              </Link>
+                <Link
+                  href={item.href}
+                  onClick={closeMenu}
+                  {...(item.external ? externalProps : {})}
+                  className={`group flex items-center justify-between py-5 animation-effect ${isActive ? 'text-[#FF5733] dark:text-[#68CC93]' : 'text-[#1C1C1C] dark:text-[#E4E4E4]'}`}
+                >
+                  <span className='text-[40px] font-[700] tracking-[-1px]'>{item.label}</span>
+                  <FiArrowUpRight className='text-[28px] text-[#7E7E7E] group-hover:text-[#FF5733] dark:group-hover:text-[#68CC93] group-hover:translate-x-1 group-hover:-translate-y-1 animation-effect' />
+                </Link>
+              </li>
             )
-            :
-            (
-              <Link
-                key={i}
-                href={item.href} 
-                onClick={() => { setOpen(!open) }}
-              >
-                <button className='w-fit rounded-[10px] py-[12px] px-[24px] text-[#1C1C1C] hover:text-[#FCFAF4] dark:text-[#E4E4E4] dark:hover:text-[#FCFAF4] border-[1px] border-[#3E3E3E] hover:border-[#FF5733] hover:bg-[#FF5733] dark:hover:border-[#68CC93] dark:hover:bg-[#68CC93] animation-effect'>
-                  {item.label}
-                </button>
-              </Link>
-            )
-          ))}
+          })}
         </ul>
+
+        <div className='mt-auto flex flex-col gap-8'>
+          {ctaLink && (
+            <Link
+              href={ctaLink.href}
+              onClick={closeMenu}
+              {...(ctaLink.external ? externalProps : {})}
+              className='w-full'
+            >
+              <button className='w-full rounded-[12px] py-[16px] text-[18px] font-[700] text-[#FCFAF4] bg-[#FF5733] dark:bg-[#68CC93] animation-effect'>
+                {ctaLink.label}
+              </button>
+            </Link>
+          )}
+
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center gap-6'>
+              {iconSvg.map((item, i) => (
+                <Link key={i} href={item.href} target='_blank' rel='noopener noreferrer' onClick={closeMenu}>
+                  <item.name className='text-[24px] text-[#7E7E7E] hover:text-[#FF5733] dark:hover:text-[#68CC93] animation-effect' />
+                </Link>
+              ))}
+            </div>
+            <ThemeSwitcher />
+          </div>
+        </div>
       </div>
 
     </nav>
