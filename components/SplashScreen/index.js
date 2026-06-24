@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import { useLanguage } from '@/app/language-provider'
 
 // Deterministic widths so server and client render identically (avoids hydration mismatch)
 const BARCODE = (() => {
@@ -11,6 +12,7 @@ const BARCODE = (() => {
 })();
 
 export default function SplashScreen() {
+    const { t } = useLanguage();
     const [count, setCount] = React.useState(0);
     const [done, setDone] = React.useState(false);
     const [hidden, setHidden] = React.useState(false);
@@ -59,13 +61,13 @@ export default function SplashScreen() {
                         Dante Clericuzio
                     </span>
                     <span className="text-[#7E7E7E] font-[500] text-[12px] md:text-[14px] tracking-[-0.5px]">
-                        Web Developer, Software Engineer
+                        {t.splash.role}
                     </span>
                 </div>
                 <div className="flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-[#68CC93] animate-pulse" />
                     <span className="text-[#7E7E7E] font-[500] text-[12px] md:text-[14px] tracking-[-0.5px]">
-                        Available for work
+                        {t.splash.available}
                     </span>
                 </div>
             </div>
@@ -87,7 +89,7 @@ export default function SplashScreen() {
 
             <div className="flex items-end justify-between">
                 <span className="text-[#7E7E7E] font-[500] text-[12px] md:text-[14px] tracking-[-0.5px]">
-                    Loading
+                    {t.splash.loading}
                 </span>
                 <span className="text-[#1C1C1C] dark:text-[#E4E4E4] font-[600] text-[14px] md:text-[16px] tracking-[-0.5px]">
                     {count}%

@@ -6,21 +6,25 @@ import { SiNextdotjs, SiTailwindcss, SiPostman } from "react-icons/si";
 export const links = [
     {
         href: '/works',
-        label: 'Works'
+        label: 'Works',
+        key: 'works'
     },
     {
         href: '/about',
-        label: 'About'
+        label: 'About',
+        key: 'about'
     },
     {
         href: './cv-2026.pdf',
         label: 'Resume',
-        external: true
+        external: true,
+        key: 'resume'
     },
     {
         href: '/contact',
         isButton: true,
-        label: 'Get in touch'
+        label: 'Get in touch',
+        key: 'contact'
     }
 ]
 
@@ -39,7 +43,7 @@ export const iconSvg = [
     },
     {
         name: FaWhatsapp,
-        href: "https://wa.me/0818589669?text=I'm%20interested%20in%20working%20with%20you"
+        href: "https://wa.me/62818589669?text=I%27m%20interested%20in%20working%20with%20you"
     }
 ]
 
@@ -63,78 +67,91 @@ export const works = [
     {
         href: 'https://www.starpacificasia.com/',
         company: 'Corporate Website',
+        categoryKey: 'corporate',
         name: 'Star Pacific Asia',
         image: './starpacific.png'
     },
     {
         href: 'https://vit-pilates.com/en',
         company: 'Booking & Admin Dashboard',
+        categoryKey: 'booking',
         name: 'Vit Pilates',
         image: './vitpilates.png'
     },
     {
         href: 'https://www.yuhulab.com/',
         company: 'Product Website',
+        categoryKey: 'product',
         name: 'YUHULAB',
         image: './yuhulab.png'
     },
     {
         href: 'https://www.ptsbs.id/',
         company: 'Corporate Website',
+        categoryKey: 'corporate',
         name: 'PT SBS',
         image: './sbs.png'
     },
     {
         href: 'https://www.ptskl.com/',
         company: 'Corporate Website',
+        categoryKey: 'corporate',
         name: 'PT SKL',
         image: './skl.png'
     },
     {
         href: 'https://lingofoundry.com/',
         company: 'Education Website',
+        categoryKey: 'education',
         name: 'LingoFoundry',
         image: './lingofoundry.png'
     },
     {
         href: 'https://www.internationalsar.com/',
         company: 'Corporate Website',
+        categoryKey: 'corporate',
         name: 'PT SAR International',
         image: './sar.png'
     },
     {
         href: 'https://www.jskshipping.com/',
         company: 'Corporate Website',
+        categoryKey: 'corporate',
         name: 'PT JSK',
         image: './jsk.png'
     },
     {
         href: 'https://indonesiabisnismandiri.com/',
         company: 'Corporate Website',
+        categoryKey: 'corporate',
         name: 'PT IBM',
         image: './ibm.png'
     },
     {
         href: 'https://eastcruisekomodo.co.id/',
         company: 'Travel Website',
+        categoryKey: 'travel',
         name: 'East Cruise Komodo',
         image: './eck.png'
     },
     {
         href: 'https://houseplantshub.com/',
         company: 'Corporate Website',
+        categoryKey: 'corporate',
         name: 'HousePlant.Hub',
         image: './hph.png'
     },
     {
         href: 'https://kayoo.id/',
         company: 'Corporate Website',
+        categoryKey: 'corporate',
         name: 'KAYOO',
         image: './kayoo.png'
     },
     {
         href: 'https://easycash.id/',
         company: 'Corporate Website',
+        categoryKey: 'corporate',
         name: 'Easycash',
         image: './easycash.png'
     }

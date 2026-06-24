@@ -5,11 +5,14 @@ import React, { useState, useEffect } from 'react'
 import { FiArrowUpRight } from 'react-icons/fi'
 import { links, iconSvg } from '@/app/constants'
 import ThemeSwitcher from '@/components/ThemeSwitcher'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
+import { useLanguage } from '@/app/language-provider'
 
 export default function NavBar() {
 
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const { t } = useLanguage()
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -37,7 +40,7 @@ export default function NavBar() {
       return (
         <Link key={i} href={item.href} onClick={closeMenu} {...(item.external ? externalProps : {})}>
           <button className='hidden nav:block rounded-[10px] py-[12px] px-[24px] text-[18px] font-[600] text-[#1C1C1C] hover:text-[#FCFAF4] dark:text-[#E4E4E4] dark:hover:text-[#FCFAF4] border border-[#3E3E3E] hover:border-[#FF5733] hover:bg-[#FF5733] dark:hover:border-[#68CC93] dark:hover:bg-[#68CC93] animation-effect'>
-            {item.label}
+            {t.nav[item.key]}
           </button>
         </Link>
       )
@@ -51,7 +54,7 @@ export default function NavBar() {
         {...(item.external ? externalProps : {})}
         className={`text-[24px] font-[700] animation-effect hover:text-[#FF5733] dark:hover:text-[#68CC93] ${isActive ? 'text-[#FF5733] dark:text-[#68CC93]' : 'text-[#1C1C1C] dark:text-[#E4E4E4]'}`}
       >
-        {item.label}
+        {t.nav[item.key]}
       </Link>
     )
   }
@@ -68,13 +71,14 @@ export default function NavBar() {
 
         <div className='hidden nav:flex items-center gap-[40px]'>
           {links.map((item, i) => renderDesktopLink(item, i))}
+          <LanguageSwitcher />
           <ThemeSwitcher />
         </div>
 
         {/* MOBILE TOGGLE */}
         <button
           type='button'
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
           className='flex nav:hidden shrink-0 w-6 h-6 cursor-pointer flex-col justify-between items-center'
@@ -114,7 +118,7 @@ export default function NavBar() {
                   {...(item.external ? externalProps : {})}
                   className={`group flex items-center justify-between py-5 animation-effect ${isActive ? 'text-[#FF5733] dark:text-[#68CC93]' : 'text-[#1C1C1C] dark:text-[#E4E4E4]'}`}
                 >
-                  <span className='text-[40px] font-[700] tracking-[-1px]'>{item.label}</span>
+                  <span className='text-[40px] font-[700] tracking-[-1px]'>{t.nav[item.key]}</span>
                   <FiArrowUpRight className='text-[28px] text-[#7E7E7E] group-hover:text-[#FF5733] dark:group-hover:text-[#68CC93] group-hover:translate-x-1 group-hover:-translate-y-1 animation-effect' />
                 </Link>
               </li>
@@ -131,7 +135,7 @@ export default function NavBar() {
               className='w-full'
             >
               <button className='w-full rounded-[12px] py-[16px] text-[18px] font-[700] text-[#FCFAF4] bg-[#FF5733] dark:bg-[#68CC93] animation-effect'>
-                {ctaLink.label}
+                {t.nav[ctaLink.key]}
               </button>
             </Link>
           )}
@@ -144,7 +148,10 @@ export default function NavBar() {
                 </Link>
               ))}
             </div>
-            <ThemeSwitcher />
+            <div className='flex items-center gap-3'>
+              <LanguageSwitcher />
+              <ThemeSwitcher />
+            </div>
           </div>
         </div>
       </div>

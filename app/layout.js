@@ -5,6 +5,7 @@ import {DM_Sans} from 'next/font/google'
 import Whatsapp from '@/components/whatsapp'
 import SplashScreen from '@/components/SplashScreen'
 import Providers from './provider'
+import { LanguageProvider } from './language-provider'
 
 const dmsans = DM_Sans({subsets: ['latin'],  weight:['400','500','700']})
 
@@ -16,13 +17,15 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${dmsans.className} relative`}>
         <Providers>
-          <SplashScreen/>
-          <header>
-            <NavBar/>
-          </header>
-          {children}
-          <Whatsapp/>
-          <Footer/>
+          <LanguageProvider>
+            <SplashScreen/>
+            <header>
+              <NavBar/>
+            </header>
+            {children}
+            <Whatsapp/>
+            <Footer/>
+          </LanguageProvider>
         </Providers>
       </body>
     </html>
