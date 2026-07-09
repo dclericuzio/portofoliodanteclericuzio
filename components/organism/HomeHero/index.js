@@ -7,10 +7,14 @@ import { svgLogos, works } from "@/app/constants"
 import { useLanguage } from "@/app/language-provider"
 import Reveal from "@/components/Reveal"
 
+// True only on the very first mount of the session (fresh page load, when the splash plays).
+let heroFirstMount = true
+
 export default function HomeHero(){
 
     const { t, locale } = useLanguage();
     const [showSkeleton, setShowSkeleton] = React.useState(true);
+    const [heroShow, setHeroShow] = React.useState(false);
 
     React.useEffect(() => {
         const timer = setTimeout(() => {
@@ -19,6 +23,21 @@ export default function HomeHero(){
 
         return () => clearTimeout(timer);
     }, []);
+
+    React.useEffect(() => {
+        // Delay the entrance so it lands as the splash clears on first load; quick on in-app navigation.
+        const delay = heroFirstMount ? 2100 : 150;
+        heroFirstMount = false;
+        const timer = setTimeout(() => setHeroShow(true), delay);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const heroStyle = (order) => ({
+        opacity: heroShow ? 1 : 0,
+        transform: heroShow ? 'none' : 'translateY(24px)',
+        transition: 'opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1)',
+        transitionDelay: `${order * 120}ms`,
+    });
 
     const services = t.home.services.map((s, i) => ({ n: `0${i + 1}`, ...s }));
 
@@ -33,7 +52,7 @@ export default function HomeHero(){
 
                 <div className="pt-2 pb-12 md:pb-16 grid lg:grid-cols-12 gap-10 items-center">
                     <div className="lg:col-span-8">
-                        <h1 className="text-[#1C1C1C] dark:text-[#E4E4E4] font-[600] leading-[1.02] tracking-[-1px] md:tracking-[-3px] text-[clamp(34px,5vw,80px)]">
+                        <h1 style={heroStyle(0)} className="text-[#1C1C1C] dark:text-[#E4E4E4] font-[600] leading-[1.02] tracking-[-1px] md:tracking-[-3px] text-[clamp(34px,5vw,80px)]">
                             {t.home.headlineLine1}<br className="hidden sm:block" /> {t.home.headlineLine2}
                             <span className="block text-[#FF5733] dark:text-[#68CC93] min-h-[1.1em]">
                                 {showSkeleton
@@ -56,11 +75,11 @@ export default function HomeHero(){
                             </span>
                         </h1>
 
-                        <p className="mt-6 max-w-[560px] text-[#7E7E7E] font-[500] text-[16px] md:text-[20px] tracking-[-0.5px] leading-relaxed">
+                        <p style={heroStyle(1)} className="mt-6 max-w-[560px] text-[#7E7E7E] font-[500] text-[16px] md:text-[20px] tracking-[-0.5px] leading-relaxed">
                             {t.home.intro}
                         </p>
 
-                        <div className="mt-8 flex flex-wrap items-center gap-4">
+                        <div style={heroStyle(2)} className="mt-8 flex flex-wrap items-center gap-4">
                             <Link href="/works">
                                 <button className="rounded-[10px] py-[14px] px-[28px] text-[16px] font-[700] text-[#FCFAF4] bg-[#FF5733] dark:bg-[#68CC93] hover:opacity-90 animation-effect">
                                     {t.home.seeWork}
@@ -75,7 +94,7 @@ export default function HomeHero(){
                     </div>
 
                     <div className="hidden lg:block lg:col-span-4">
-                        <div className="rounded-[20px] border border-[#3E3E3E] bg-[#F9F9F9] dark:bg-[#2C2C2C] p-6 ml-auto max-w-[360px]">
+                        <div style={heroStyle(3)} className="rounded-[20px] border border-[#3E3E3E] bg-[#F9F9F9] dark:bg-[#2C2C2C] p-6 ml-auto max-w-[360px]">
                             <div className="flex items-center gap-2 mb-6">
                                 <span className="h-2.5 w-2.5 rounded-full bg-[#68CC93] animate-pulse" />
                                 <span className="uppercase tracking-[1px] text-[12px] font-[500] text-[#7E7E7E]">{t.home.available}</span>
