@@ -69,6 +69,11 @@ export const dictionary = {
                 education: 'Education Website',
                 travel: 'Travel Website',
             },
+            back: 'All work',
+            overview: 'Overview',
+            services: 'Services',
+            visit: 'Visit website',
+            notFound: 'Project not found',
         },
         contact: {
             eyebrow: 'Contact',
@@ -164,6 +169,11 @@ export const dictionary = {
                 education: 'Website Edukasi',
                 travel: 'Website Travel',
             },
+            back: 'Semua karya',
+            overview: 'Ringkasan',
+            services: 'Layanan',
+            visit: 'Kunjungi website',
+            notFound: 'Proyek tidak ditemukan',
         },
         contact: {
             eyebrow: 'Kontak',

@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { iconSvg } from '@/app/constants';
 import { useLanguage } from '@/app/language-provider';
+import Reveal from '@/components/Reveal';
 
 export default function ContactHero() {
 
@@ -79,7 +80,7 @@ export default function ContactHero() {
                 <div className="grid lg:grid-cols-2 gap-5 items-stretch">
 
                     {/* INFO */}
-                    <div className="rounded-[20px] border border-[#3E3E3E] bg-[#F9F9F9] dark:bg-[#2C2C2C] p-8 md:p-10 flex flex-col gap-8">
+                    <Reveal className="rounded-[20px] border border-[#3E3E3E] bg-[#F9F9F9] dark:bg-[#2C2C2C] p-8 md:p-10 flex flex-col gap-8">
                         <p className="text-[#7E7E7E] font-[500] text-[16px] md:text-[18px] leading-relaxed">
                             {t.contact.info}
                         </p>
@@ -108,10 +109,10 @@ export default function ContactHero() {
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </Reveal>
 
                     {/* FORM */}
-                    <div className="rounded-[20px] border border-[#3E3E3E] bg-[#F9F9F9] dark:bg-[#2C2C2C] p-8 md:p-10">
+                    <Reveal delay={90} className="rounded-[20px] border border-[#3E3E3E] bg-[#F9F9F9] dark:bg-[#2C2C2C] p-8 md:p-10">
                         <form onSubmit={sendEmail} className="flex flex-col gap-4 w-full">
                             <input
                                 required
@@ -141,7 +142,7 @@ export default function ContactHero() {
                                 {loading ? t.contact.sending : cooldown > 0 ? `${t.contact.sentWait} ${cooldown}${t.contact.secondsSuffix}` : t.contact.send}
                             </button>
                         </form>
-                    </div>
+                    </Reveal>
 
                 </div>
             </div>
