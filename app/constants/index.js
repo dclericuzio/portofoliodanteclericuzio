@@ -65,6 +65,19 @@ export const svgLogos = [
 
 export const works = [
     {
+        slug: 'berkat-bhumi-lestari',
+        href: 'https://www.berkatbhumilestari.id/',
+        company: 'Corporate Website',
+        categoryKey: 'corporate',
+        name: 'Berkat Bhumi Lestari',
+        image: './bbl.png',
+        tags: ['Web Design', 'Development'],
+        description: {
+            en: 'A corporate website for PT Berkat Bhumi Lestari (BBL), an Indonesia-based nature capital and climate investment platform. It presents their green and blue carbon asset solutions, governance, and partnerships with a calm, nature-led identity.',
+            id: 'Website korporat untuk PT Berkat Bhumi Lestari (BBL), platform investasi modal alam dan iklim yang berbasis di Indonesia. Situs ini menampilkan solusi aset karbon hijau dan biru, tata kelola, dan kemitraan mereka dengan identitas yang tenang dan bernuansa alam.'
+        }
+    },
+    {
         slug: 'lune-living',
         href: 'https://www.luneliving.id/',
         company: 'Product Website',
